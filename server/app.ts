@@ -14,6 +14,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { options } from './swagger/swagger';
 import { HttpMessages, HttpStatus } from './utils/http-status-messages';
+import path from 'path';
 
 class App {
   static prisma = new PrismaClient();
@@ -24,6 +25,8 @@ class App {
     );
     this.#app.use(express.json());
     this.#app.use(express.urlencoded({ extended: false }));
+    this.#app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
     const swaggerSpec = swaggerJsdoc(options);
     this.#app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }

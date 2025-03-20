@@ -4,7 +4,7 @@ import Button from 'components/Button/Button';
 import InputField from 'components/InputField';
 import Modal from 'components/Modal';
 import { ModalButtons } from 'components/Modal/components';
-import { selectAllPost } from 'entities/blog/model';
+import { isLoadingPost, selectAllPost } from 'entities/blog/model';
 import React, { useEffect, useState } from 'react';
 import {
   RegisterOptions,
@@ -17,6 +17,7 @@ import { useAppSelector } from 'utils/hooks/useAppSelector';
 import { createPost, deletePost, fetchPosts, updatePost } from './thunks';
 import { IBlogPost } from 'utils/constants/types';
 import { toast } from 'react-toastify';
+import Spinner from 'components/Loader/Spinner';
 type FormValues = {
   title: string;
   description: string;
@@ -49,11 +50,11 @@ const DeleteEdit = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const posts: IBlogPost[] = useAppSelector(selectAllPost);
+  const isLoading = useAppSelector(isLoadingPost);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
-  console.log(posts, 'posts');
   const handleDelete = async (postId: number) => {
     const data: any = await dispatch(deletePost(postId)).unwrap();
     if (data && data?.message) {
@@ -65,11 +66,15 @@ const DeleteEdit = () => {
     postId: number,
     updatedBlog: { title: string; description: string }
   ) => {
-    const response: Record<string, any> = await dispatch(
-      updatePost({ id: postId, ...updatedBlog })
-    ).unwrap();
-    if (response && response.message) {
-      toast.success(response.message, { position: 'bottom-right' });
+    try {
+      const response: Record<string, any> = await dispatch(
+        updatePost({ id: postId, ...updatedBlog })
+      ).unwrap();
+      if (response && response.message) {
+        toast.success(response.message, { position: 'bottom-right' });
+      }
+    } catch (err: any) {
+      toast.error(err.message, { position: 'bottom-right' });
     }
   };
   const handleSearch = (searchTerm: string) => {
@@ -81,18 +86,22 @@ const DeleteEdit = () => {
     setOpenModal(true);
   };
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log('Form Data:');
-    const response: Record<string, any> = await dispatch(
-      //@ts-ignore
-      createPost({
-        title: data.title,
-        description: data.description,
-        image: data.image[0],
-      })
-    ).unwrap();
-    if (response && response?.message) {
-      toast.success(response.message, { position: 'bottom-right' });
-      setOpenModal(false);
+    try {
+      const response: Record<string, any> = await dispatch(
+        //@ts-ignore
+        createPost({
+          title: data.title,
+          description: data.description,
+          image: data.image[0],
+        })
+      ).unwrap();
+      if (response && response?.message) {
+        toast.success(response.message, { position: 'bottom-right' });
+        setOpenModal(false);
+        reset();
+      }
+    } catch (err: any) {
+      toast.error(err.message, { position: 'bottom-right' });
     }
   };
   const handleCancel = () => {
@@ -142,6 +151,11 @@ const DeleteEdit = () => {
             </Button>
           </ModalButtons>
         </Modal>
+      )}
+      {isLoading && (
+        <div className="min-h-screen bg-gray-50 flex items-start justify-center">
+          <Spinner />
+        </div>
       )}
       {posts?.map((post: IBlogPost) => (
         <BlogPost

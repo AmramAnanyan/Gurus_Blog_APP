@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import { BASE_API_URL } from 'utils/constants/generic';
+import { useNavigate } from 'react-router-dom';
 
 interface BlogPostProps {
   id: number;
@@ -22,6 +23,7 @@ const BlogPost = ({
   onDelete,
   onEdit,
 }: BlogPostProps) => {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedDescription, setEditedDescription] = useState(description);
@@ -30,9 +32,6 @@ const BlogPost = ({
     onEdit(id, { title: editedTitle, description: editedDescription });
     setIsEditing(false);
   };
-  useEffect(() => {
-    console.log(image, 'image');
-  }, [image]);
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-6">
       <div className="md:flex">
@@ -81,6 +80,14 @@ const BlogPost = ({
             )}
             <Button onClick={() => onDelete(id)} variant="danger">
               Delete
+            </Button>
+            <Button
+              onClick={() => {
+                navigate(`/post-details/${id}`);
+              }}
+              variant="secondary"
+            >
+              Details
             </Button>
           </div>
         </div>

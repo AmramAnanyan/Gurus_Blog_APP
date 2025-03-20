@@ -14,4 +14,10 @@ export const HARD_CODE_ROUTES: Array<RouteType> = [
     component: lazy(() => import('pages/Home')),
     isPrivate: false,
   },
+  {
+    path: '/post-details/*',
+    props: null,
+    component: lazy(() => import('pages/PostDetails')),
+    isPrivate: false,
+  },
 ];

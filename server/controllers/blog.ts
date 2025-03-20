@@ -100,7 +100,7 @@ class BlogController {
     const post: BlogPost = {
       title: req.body.title,
       description: req.body.description,
-      image: req.file?.path || 'not_image',
+      image: req.file ? `uploads/images/${req.file.filename}` : 'not_image',
     };
     try {
       const createdPost = await this.blogService.createPostInDB(post);

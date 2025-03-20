@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from 'components/Button/Button';
 const NotFound = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
@@ -37,7 +38,14 @@ const NotFound = () => {
             changed, or is temporarily unavailable.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-            <Button variant="primary">Return Home</Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              Return Home
+            </Button>
             <Button variant="outline">Contact Support</Button>
           </div>
         </div>

@@ -98,4 +98,11 @@ const blogPostSlice = createSlice({
 });
 
 export const selectAllPost = (state: any) => state.blogPost.posts;
+export const isLoadingPost = (state: any) => state.blogPost.loading;
+export const selectPostById = (id: number, state: any) => {
+  console.log(id, state.blogPost, '=====>>>');
+  return state.blogPost.posts.find((item: any) => {
+    return id === item.id;
+  });
+};
 export default blogPostSlice.reducer;
