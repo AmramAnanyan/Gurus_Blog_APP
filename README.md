@@ -119,33 +119,15 @@ src/
 
 ---
 
-## 🛠️ Setup & Installation
+1. **Setup client:**
 
-### 1️⃣ Clone the Repository
-
-```sh
-git clone https://github.com/AmramAnanyan/studio_one.git
-```
-
-### 2️⃣ Install Dependencies
-
-```sh
-npm install
-```
-
-### 3️⃣ Start Development Server
-
-```sh
-npm start
-```
-
-### 4️⃣ Build for Production
-
-```sh
-npm run build
-```
-
----
+   ```bash
+   cd client
+   npm install
+   PORT=3000
+   npm start
+   http://localhost:3000
+   ```
 
 ![Home Page](./README_IMAGES/home.png)
 
