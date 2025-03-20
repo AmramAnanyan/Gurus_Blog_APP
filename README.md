@@ -57,7 +57,7 @@ src/
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-repository-url.git
+   git clone https://github.com/AmramAnanyan/Gurus_Blog_APP.git
    cd server
    npm install
    DATABASE_URL="postgresql://your-user:your-password@localhost:5432/your-database"
