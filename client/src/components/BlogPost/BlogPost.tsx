@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
+import { BASE_API_URL } from 'utils/constants/generic';
 
 interface BlogPostProps {
-  id: string;
+  id: number;
   title: string;
   description: string;
-  imageUrl: string;
-  onDelete: (id: string) => void;
+  image?: string | File;
+  onDelete: (id: number) => Promise<void>;
   onEdit: (
-    id: string,
+    id: number,
     updatedPost: { title: string; description: string }
   ) => void;
 }
@@ -17,7 +18,7 @@ const BlogPost = ({
   id,
   title,
   description,
-  imageUrl,
+  image,
   onDelete,
   onEdit,
 }: BlogPostProps) => {
@@ -29,14 +30,16 @@ const BlogPost = ({
     onEdit(id, { title: editedTitle, description: editedDescription });
     setIsEditing(false);
   };
-
+  useEffect(() => {
+    console.log(image, 'image');
+  }, [image]);
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-6">
       <div className="md:flex">
         <div className="md:shrink-0">
           <img
             className="h-48 w-full object-cover md:w-48"
-            src={imageUrl}
+            src={`${BASE_API_URL}/${image}`}
             alt="Blog post cover"
           />
         </div>
