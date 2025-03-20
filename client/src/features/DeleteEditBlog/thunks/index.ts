@@ -5,7 +5,7 @@ import { IBlogPost } from 'utils/constants/types';
 export const fetchPosts = createAsyncThunk<IBlogPost[], void>(
   'blogPosts/fetchPosts',
   async () => {
-    const response = await fetch('http://localhost:8080/posts');
+    const response = await fetch(`${BASE_API_URL}/posts`);
     if (!response.ok) {
       throw new Error('Failed to fetch posts');
     }
@@ -16,7 +16,7 @@ export const fetchPosts = createAsyncThunk<IBlogPost[], void>(
 export const fetchPostById = createAsyncThunk<IBlogPost, number>(
   'blogPosts/fetchPostById',
   async (id) => {
-    const response = await fetch(`http://localhost:8080/posts/${id}`);
+    const response = await fetch(`${BASE_API_URL}/posts/${id}`);
     if (!response.ok) {
       throw new Error('Failed to fetch the post');
     }
@@ -45,14 +45,11 @@ export const createPost = createAsyncThunk<IBlogPost, IBlogPost>(
 export const updatePost = createAsyncThunk<Omit<IBlogPost, 'image'>, IBlogPost>(
   'blogPosts/updatePost',
   async (updatedPost) => {
-    const response = await fetch(
-      `http://localhost:8080/posts/${updatedPost.id}`,
-      {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedPost),
-      }
-    );
+    const response = await fetch(`${BASE_API_URL}/posts/${updatedPost.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedPost),
+    });
     if (!response.ok) {
       throw new Error('Failed to update post');
     }
@@ -63,7 +60,7 @@ export const updatePost = createAsyncThunk<Omit<IBlogPost, 'image'>, IBlogPost>(
 export const deletePost = createAsyncThunk<number, number>(
   'blogPosts/deletePost',
   async (id) => {
-    const response = await fetch(`http://localhost:8080/posts/${id}`, {
+    const response = await fetch(`${BASE_API_URL}/posts/${id}`, {
       method: 'DELETE',
     });
     if (!response.ok) {

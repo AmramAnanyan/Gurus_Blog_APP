@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import App from '../app';
 import BlogController from '../controllers/blog';
 import fileUpload from '../middlewares/filoe-upload';
 import { POST_FIELDS_VALIDATORS } from '../middlewares/blog-validators';

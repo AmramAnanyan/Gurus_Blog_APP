@@ -1,9 +1,11 @@
 # Server
 
 ## Express TypeScript App with Prisma, Express Validator, File Upload & Swagger API Docs
+
 # Attention:
 
 ## The .env file containing the database URL has been committed. You can use it for accessing my database.
+
 ## Description
 
 This project is a boilerplate for an Express application built with TypeScript and object-oriented programming. It follows a modular architecture with Routes, Controllers, and Services. The app uses Prisma ORM for PostgreSQL, Express Validator for request validation, Multer for handling file uploads, and Swagger for API documentation.
@@ -103,7 +105,7 @@ src/
 - **State Management:** Redux Toolkit, RTK Query
 - **Architecture:** Feature-Sliced Design (FSD)
 - **API Requests:** Custom Fetch
-- **Styling:** Styled component / CSS Modules
+- **Styling:** Tailwind
 - **Build Tool:** Webpack
 - **TypeScript:** Strongly typed components & store
 - **Form Handling:** React Hook Form

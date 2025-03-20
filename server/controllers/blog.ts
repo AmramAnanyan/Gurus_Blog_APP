@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { BlogPost } from '../utils/types';
 import BlogService from '../services/blog';
 import HttpError from '../utils/http-error';
