@@ -57,10 +57,11 @@ class BlogController {
   editPostById = async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const errors = validationResult(req);
+    console.log(req.body, 'req body');
     if (isNaN(id) || !errors.isEmpty()) {
       res
         .status(HttpStatus.BAD_REQUEST)
-        .json({ message: HttpMessages[HttpStatus.BAD_REQUEST] });
+        .json({ message: HttpMessages[HttpStatus.BAD_REQUEST], errors });
       return;
     }
     try {

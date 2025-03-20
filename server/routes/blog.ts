@@ -104,6 +104,7 @@ class BlogRoutes {
   private editPostById() {
     this.router.put(
       '/posts/:id',
+      fileUpload.single('image'),
       ...POST_FIELDS_VALIDATORS,
       BlogController.editPostById
     );

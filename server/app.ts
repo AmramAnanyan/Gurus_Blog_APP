@@ -14,6 +14,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { options } from './utils/swagger';
 import fs from 'fs';
+import { HttpMessages, HttpStatus } from './utils/http-status-messages';
 
 class App {
   static prisma = new PrismaClient();
@@ -29,6 +30,11 @@ class App {
   }
   #routerMiddleWares() {
     this.#app.use(Blog.routers());
+    this.#app.use((req: Request, res: Response) => {
+      res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: HttpMessages[HttpStatus.NOT_FOUND] });
+    });
   }
   #runServer() {
     this.#app.listen(PORT, (error) => {
