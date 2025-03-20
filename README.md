@@ -16,6 +16,8 @@ This project is a boilerplate for an Express application built with TypeScript a
 - **Swagger API Documentation** to easily test and explore API endpoints.
 - **Modular Architecture** with clearly separated Routes, Controllers, and Services.
 
+  ![Swagger doc](./README_IMAGES/swagger-img.png)
+
 ## Technologies
 
 - **Node.js** with Express
@@ -64,8 +66,6 @@ src/
    npm run dev
    http://localhost:8080/api-docs
    ```
-
-   ![Swagger doc](./README_IMAGES/swagger-img.png)
 
    # Client
 
@@ -144,8 +144,6 @@ npm start
 ```sh
 npm run build
 ```
-
-![Swagger doc](./README_IMAGES/swagger-img.png)
 
 ---
 

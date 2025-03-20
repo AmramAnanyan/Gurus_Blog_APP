@@ -1,0 +1,20 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "This project is a boilerplate for an Express application built with TypeScript and object-oriented programming. It follows a modular architecture with Routes, Controllers, and Services. The app uses Prisma ORM for PostgreSQL, Express Validator for request validation, Multer for handling file uploads, and Swagger for API documentation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm --prefix server/ run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmramAnanyan/Gurus_Blog_APP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmramAnanyan/Gurus_Blog_APP/issues"
+  },
+  "homepage": "https://github.com/AmramAnanyan/Gurus_Blog_APP#readme"
+}
