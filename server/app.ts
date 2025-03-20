@@ -12,8 +12,7 @@ import { PORT } from './configs/constants';
 import Blog from './routes/blog';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import { options } from './utils/swagger';
-import fs from 'fs';
+import { options } from './swagger/swagger';
 import { HttpMessages, HttpStatus } from './utils/http-status-messages';
 
 class App {
