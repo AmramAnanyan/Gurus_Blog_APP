@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import App from '../app';
 import BlogController from '../controllers/blog';
+import fileUpload from '../middlewares/filoe-upload';
+import { POST_FIELDS_VALIDATORS } from '../middlewares/blog-validators';
 
 class BlogRoutes {
   router: Router;
@@ -8,6 +10,7 @@ class BlogRoutes {
     this.router = Router();
   }
   private getAllPosts() {
+    this.router.get('/posts', BlogController.getAllPosts);
     /**
      * @swagger
      * /posts:
@@ -18,9 +21,14 @@ class BlogRoutes {
      *       200:
      *         description: A list of blog posts
      */
-    this.router.get('/posts', BlogController.getAllPosts);
   }
   private createPosts() {
+    this.router.post(
+      '/posts',
+      fileUpload.single('image'),
+      ...POST_FIELDS_VALIDATORS,
+      BlogController.createPost
+    );
     /**
      * @swagger
      * /posts:
@@ -55,10 +63,9 @@ class BlogRoutes {
      *       400:
      *         description: Invalid request body
      */
-
-    this.router.post('/posts', BlogController.createPost);
   }
   private getPostById() {
+    this.router.get('/posts/:id', BlogController.getPostById);
     /**
      * @swagger
      * /posts/{id}:
@@ -93,10 +100,13 @@ class BlogRoutes {
      *       404:
      *         description: Post not found
      */
-
-    this.router.get('/posts/:id', BlogController.getPostById);
   }
   private editPostById() {
+    this.router.put(
+      '/posts/:id',
+      ...POST_FIELDS_VALIDATORS,
+      BlogController.editPostById
+    );
     /**
      * @swagger
      * /posts/{id}:
@@ -134,10 +144,9 @@ class BlogRoutes {
      *       404:
      *         description: Post not found
      */
-
-    this.router.put('/posts/:id', BlogController.editPostById);
   }
   private deletePostById() {
+    this.router.delete('/posts/:id', BlogController.deletePostById);
     /**
      * @swagger
      * /posts/{id}:
@@ -159,8 +168,6 @@ class BlogRoutes {
      *       404:
      *         description: Post not found
      */
-
-    this.router.put('/posts/:id', BlogController.deletePostById);
   }
   public routers = () => {
     this.getAllPosts();

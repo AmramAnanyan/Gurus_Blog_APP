@@ -10,5 +10,5 @@ export const options: swaggerJsdoc.Options = {
     },
     servers: [{ url: 'http://localhost:8080' }],
   },
-  apis: ['./routes/*.ts'], // Path to API routes
+  apis: ['./routes/*.ts'],
 };
