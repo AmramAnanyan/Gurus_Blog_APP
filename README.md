@@ -32,10 +32,11 @@ This project is a boilerplate for an Express application built with TypeScript a
 
 ## Project Structure
 
-src/ #
-├── controllers/ #
-│ └── blogController.ts #
-├── services/ #
+```plaintext
+src/
+├── controllers/
+│ └── blogController.ts
+├── services/
 │ └── blogService.ts
 ├── routes/
 │ └── blogRoutes.ts
@@ -47,6 +48,7 @@ src/ #
 │ └── schema.prisma
 ├── app.ts
 ├── server.ts
+```
 
 ## Installation
 
