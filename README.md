@@ -32,10 +32,10 @@ This project is a boilerplate for an Express application built with TypeScript a
 
 ## Project Structure
 
-src/
-├── controllers/
-│ └── blogController.ts
-├── services/
+src/ #
+├── controllers/ #
+│ └── blogController.ts #
+├── services/ #
 │ └── blogService.ts
 ├── routes/
 │ └── blogRoutes.ts
@@ -152,6 +152,8 @@ npm run build
 ![Create post](./README_IMAGES/create.png)
 
 ![Details Page](./README_IMAGES/details.png)
+
+![Not Found Page](./README_IMAGES/404.png)
 
 ## 📚 Resources & Documentation
 
