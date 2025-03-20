@@ -145,6 +145,31 @@ class BlogController {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
     }
   };
+  searchPostByTerm = async (req: Request, res: Response) => {
+    const searchTerm = req.query.term;
+    if (!searchTerm || !searchTerm.toString().trim()) {
+      res
+        .status(HttpStatus.BAD_REQUEST)
+        .json({ message: HttpMessages[HttpStatus.BAD_REQUEST] });
+      return;
+    }
+    try {
+      const searchedPosts = await this.blogService.searchPostFromDB(
+        searchTerm.toString()
+      );
+      if (!searchedPosts.length) {
+        res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ message: HttpMessages[HttpStatus.NOT_FOUND] });
+        return;
+      }
+      res.json({ posts: searchedPosts });
+    } catch (err) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: HttpMessages[HttpStatus.INTERNAL_SERVER_ERROR] });
+    }
+  };
 }
 
 export default new BlogController();

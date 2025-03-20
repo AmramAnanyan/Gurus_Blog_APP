@@ -72,5 +72,34 @@ class BlogService {
       );
     }
   }
+  public async searchPostFromDB(
+    searchTerm: string
+  ): Promise<BlogPost[] | any[]> {
+    try {
+      return App.prisma.blogPost.findMany({
+        where: {
+          OR: [
+            {
+              title: {
+                contains: searchTerm,
+                mode: 'insensitive',
+              },
+            },
+            {
+              description: {
+                contains: searchTerm,
+                mode: 'insensitive',
+              },
+            },
+          ],
+        },
+      });
+    } catch (err) {
+      throw new HttpError(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpMessages[HttpStatus.INTERNAL_SERVER_ERROR]
+      );
+    }
+  }
 }
 export default BlogService;

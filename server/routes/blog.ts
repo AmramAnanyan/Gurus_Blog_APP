@@ -170,8 +170,49 @@ class BlogRoutes {
      *         description: Post not found
      */
   }
+  private searchPostByTerm() {
+    this.router.get('/posts/search', BlogController.searchPostByTerm);
+    /**
+     * @swagger
+     * /posts/search:
+     *   get:
+     *     summary: Search blog posts by title or description
+     *     parameters:
+     *       - in: query
+     *         name: term
+     *         required: true
+     *         description: Search term to find in the title or description
+     *         schema:
+     *           type: string
+     *     responses:
+     *       200:
+     *         description: List of posts matching search term
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 type: object
+     *                 properties:
+     *                   id:
+     *                     type: integer
+     *                   title:
+     *                     type: string
+     *                   description:
+     *                     type: string
+     *                   image:
+     *                     type: string
+     *       400:
+     *         description: Invalid search term
+     *       404:
+     *         description: No posts found
+     *       500:
+     *         description: Server error
+     */
+  }
   public routers = () => {
     this.getAllPosts();
+    this.searchPostByTerm();
     this.createPosts();
     this.getPostById();
     this.editPostById();
