@@ -5,41 +5,27 @@ import InputField from 'components/InputField';
 import Modal from 'components/Modal';
 import { ModalButtons } from 'components/Modal/components';
 import { isLoadingPost, selectAllPost } from 'entities/blog/model';
-import React, { useEffect, useState } from 'react';
-import {
-  RegisterOptions,
-  SubmitHandler,
-  useForm,
-  UseFormRegisterReturn,
-} from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch } from 'utils/hooks/useAppDispatch';
 import { useAppSelector } from 'utils/hooks/useAppSelector';
-import { createPost, deletePost, fetchPosts, updatePost } from './thunks';
+import {
+  createPost,
+  deletePost,
+  fetchPosts,
+  searchPost,
+  updatePost,
+} from './thunks';
 import { IBlogPost } from 'utils/constants/types';
 import { toast } from 'react-toastify';
 import Spinner from 'components/Loader/Spinner';
+import useDebounce from 'utils/hooks/useDebounce';
+import EmptyStateCard from 'components/EmptyCart';
 type FormValues = {
   title: string;
   description: string;
   image: FileList;
 };
-const initialPosts = [
-  {
-    id: '1',
-    title: 'Exploring the Universe',
-    description:
-      'A deep dive into the mysteries of the cosmos, uncovering secrets of galaxies, stars, and black holes.',
-    imageUrl: 'https://picsum.photos/400/300?random=2',
-  },
-  {
-    id: '2',
-    title: 'The Future of AI',
-    description:
-      'How artificial intelligence is reshaping industries, from healthcare to finance, and what it means for humanity.',
-    imageUrl: 'https://picsum.photos/400/300?random=1',
-  },
-];
-
 const DeleteEdit = () => {
   const {
     register,
@@ -48,13 +34,15 @@ const DeleteEdit = () => {
     formState: { errors },
   } = useForm<any>();
   const [openModal, setOpenModal] = useState(false);
-
+  const { debounce } = useDebounce();
   const posts: IBlogPost[] = useAppSelector(selectAllPost);
   const isLoading = useAppSelector(isLoadingPost);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
+
   const handleDelete = async (postId: number) => {
     const data: any = await dispatch(deletePost(postId)).unwrap();
     if (data && data?.message) {
@@ -78,8 +66,12 @@ const DeleteEdit = () => {
     }
   };
   const handleSearch = (searchTerm: string) => {
-    // Implement search logic
-    console.log('Searching for:', searchTerm);
+    debounce({
+      delay: 700,
+      callBack: () => {
+        dispatch(searchPost(searchTerm));
+      },
+    });
   };
 
   const handleCreateNew = () => {
@@ -156,6 +148,9 @@ const DeleteEdit = () => {
         <div className="min-h-screen bg-gray-50 flex items-start justify-center">
           <Spinner />
         </div>
+      )}
+      {!posts.length && !isLoading && (
+        <EmptyStateCard onCreatePost={handleCreateNew}></EmptyStateCard>
       )}
       {posts?.map((post: IBlogPost) => (
         <BlogPost

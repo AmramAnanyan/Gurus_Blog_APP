@@ -9,6 +9,7 @@ This project is a boilerplate for an Express application built with TypeScript a
 ## Features
 
 - **CRUD operations** for blog posts with file upload support.
+- **Search functionality** to filter blog posts based on title and description.
 - **Express Validator** for validating request payloads.
 - **Prisma ORM** for interacting with a PostgreSQL database.
 - **File upload** functionality via Multer.
@@ -29,6 +30,24 @@ This project is a boilerplate for an Express application built with TypeScript a
 - Node.js (v22.13.1)
 - PostgreSQL installed and running
 
+## Project Structure
+
+src/
+├── controllers/
+│ └── blogController.ts
+├── services/
+│ └── blogService.ts
+├── routes/
+│ └── blogRoutes.ts
+├── middlewares/
+│ └── fileUploadMiddleware.ts
+├── utils/
+│ └── searchUtils.ts
+├── prisma/
+│ └── schema.prisma
+├── app.ts
+├── server.ts
+
 ## Installation
 
 1. **Clone the repository:**
@@ -45,3 +64,101 @@ This project is a boilerplate for an Express application built with TypeScript a
    ```
 
    ![Swagger doc](./README_IMAGES/swagger-img.png)
+
+   # Client
+
+---
+
+## 📂 Project Structure
+
+```plaintext
+/src
+ ├── app/              # Application setup (store, providers, etc.)
+ ├── entities/         # Each entity has its own model & state
+ │    ├── blog/        # Example: News entity
+ │    └── ...
+ ├── features/         # Features that combine entities & business logic
+ │    ├── deleteAndEdit/        # Example: Authentication feature
+ │
+ │    └── ...
+ ├── shared/           # Reusable utilities, components, hooks, etc.
+ │    ├── ui/          # Shared UI components
+ │    ├── api/         # API utilities
+ │    ├── hooks/       # Custom React hooks
+ │    └── ...
+ ├── pages/            # Page components mapped to routes
+ ├── index.tsx         # Entry point
+ └── README.md         # Documentation
+```
+
+---
+
+## ⚙️ Technologies Used
+
+- **Frontend:** React 18, Redux Toolkit
+- **State Management:** Redux Toolkit, RTK Query
+- **Architecture:** Feature-Sliced Design (FSD)
+- **API Requests:** Custom Fetch
+- **Styling:** Styled component / CSS Modules
+- **Build Tool:** Webpack
+- **TypeScript:** Strongly typed components & store
+- **Form Handling:** React Hook Form
+- **Error Handling:** Toast notifications for API errors
+
+---
+
+## ✅ Key Features
+
+✔ **Feature-Sliced Design (FSD)** for better scalability and maintainability.  
+✔ **Redux Toolkit** for efficient state management.  
+✔ **Modular structure** with separation of concerns between entities, features, and UI components.  
+✔ **Reusable shared components & hooks** to avoid redundancy.  
+✔ **Scalable & performance-optimized** with lazy loading and code splitting.
+
+---
+
+## 🛠️ Setup & Installation
+
+### 1️⃣ Clone the Repository
+
+```sh
+git clone https://github.com/AmramAnanyan/studio_one.git
+```
+
+### 2️⃣ Install Dependencies
+
+```sh
+npm install
+```
+
+### 3️⃣ Start Development Server
+
+```sh
+npm start
+```
+
+### 4️⃣ Build for Production
+
+```sh
+npm run build
+```
+
+![Swagger doc](./README_IMAGES/swagger-img.png)
+
+---
+
+![Home Page](./README_IMAGES/home.png)
+
+![Create post](./README_IMAGES/create.png)
+
+![Details Page](./README_IMAGES/details.png)
+
+## 📚 Resources & Documentation
+
+- 📖 [React Docs](https://react.dev/)
+- 📖 [Redux Toolkit](https://redux-toolkit.js.org/)
+- 📖 [Feature-Sliced Design](https://feature-sliced.design/)
+- 📖 [TypeScript Docs](https://www.typescriptlang.org/)
+- 📖 [Webpack](https://webpack.js.org/)
+
+---

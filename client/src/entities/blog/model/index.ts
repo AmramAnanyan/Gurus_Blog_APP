@@ -4,6 +4,7 @@ import {
   deletePost,
   fetchPostById,
   fetchPosts,
+  searchPost,
   updatePost,
 } from 'features/DeleteEditBlog/thunks';
 import { IBlogPost } from 'utils/constants/types';
@@ -94,13 +95,25 @@ const blogPostSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Failed to delete post';
       });
+    builder
+      // Search posts
+      .addCase(searchPost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(searchPost.fulfilled, (state, action: any) => {
+        state.loading = false;
+        state.posts = action.payload.posts;
+      })
+      .addCase(searchPost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to search posts';
+      });
   },
 });
 
 export const selectAllPost = (state: any) => state.blogPost.posts;
 export const isLoadingPost = (state: any) => state.blogPost.loading;
 export const selectPostById = (id: number, state: any) => {
-  console.log(id, state.blogPost, '=====>>>');
   return state.blogPost.posts.find((item: any) => {
     return id === item.id;
   });

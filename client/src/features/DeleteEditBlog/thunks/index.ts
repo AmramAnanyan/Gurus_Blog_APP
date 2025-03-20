@@ -72,3 +72,18 @@ export const deletePost = createAsyncThunk<number, number>(
     return response.json();
   }
 );
+export const searchPost = createAsyncThunk<string, string>(
+  'blogPosts/searchPost',
+  async (searchTerm) => {
+    const response = await fetch(
+      `${BASE_API_URL}/posts/search?term=${searchTerm}`,
+      {
+        method: 'GET',
+      }
+    );
+    if (!response.ok) {
+      throw new Error('Failed to delete post');
+    }
+    return response.json();
+  }
+);
